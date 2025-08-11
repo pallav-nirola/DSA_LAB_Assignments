@@ -1,0 +1,99 @@
+    #include<iostream>
+    #include<algorithm>
+    #include<string>
+  // using nUpperCase To LowerCase
+  //   int main(){
+//       string str;
+//       getline(cin, str);
+//       for(char &ch : str){ // here & is not address operator in char it means you are passing a reference}
+//           if (ch >= 'A' && ch <= 'Z') {
+//             ch = ch + 32;}}
+//       cout<<str;
+//       return 0 ;
+//   }
+  
+   //Concatenate Strings
+//   int main(){
+//       string str;
+//       getline(cin, str);
+//         string str_2;
+//       getline(cin, str_2);
+//       string result = "";
+//       for(char ch : str) {
+//           result = result + ch;
+//       }
+//       for(char c : str_2) { 
+//           result = result + c;  
+//       }
+//       cout<<result<<endl;
+//       return 0 ;// 1st apprach 
+//   }
+    //   int main(){ 
+    //       string str;
+    //       getline(cin, str);
+    //       string str_2;
+    //       getline(cin, str_2);
+    //       string res = "";
+    //       string spac=" ";
+           
+    //       res.reserve(str.size() + str_2.size());// preallocating the memory for the size instead of allocating to each and every char ch
+    //       res.append(str);//append means to add something at the end of a string; here you are adding str into res Strings
+    //       res.append(spac);// trying to add sapce using using append as it was not possible to add space in the reserve as it would just reserve the space not add it through;
+    //       res.append(str_2);
+    //       cout<<res; //Optimised Approach
+    //       return 0;
+    //   }
+
+   // for sorting in alphabetical order
+//   int main(){
+   
+//   string str; 
+//   getline(cin, str);
+//   sort(str.begin(), str.end());
+//   cout<<str;
+//       return 0 ;
+//     }
+  
+   
+  // you have to remove vowels 
+   
+    // int main() {
+    // string str;
+    // cout << "Enter a string: ";
+    // getline(cin, str);
+
+    // string vowels = "aeiouAEIOU";
+    // string result = "";
+
+    // for (char c : str) {
+    //     if (vowels.find(c) == string::npos){ //string::npos is a special constant used to indicate “not found” when searching in a string
+    //vowels.find('l') → not found → returns string::npos
+    //.find(c) returns either:
+
+// A number (0, 1, 2, …) → meaning found at that index.
+
+// string::npos → meaning not found
+// // string::npos == string::npos → true → means l is not a vowel.
+// // If c = 'o':
+// // vowels.find('o') → found at index 4 → returns 4
+// // 4 == string::npos → false → means o is a vowel.
+    //         result = result + c;}
+    // }
+    // cout << "String without vowels: " << result << endl;
+    //     return 0 ;
+    // }
+    
+    
+
+
+// reversing a str;
+    // using namespace std;
+    // int main(){
+    // string str;
+    // getline(cin, str);
+    // reverse(str.begin(), str.end());
+    // cout<<str<<endl;
+
+
+    
+    
