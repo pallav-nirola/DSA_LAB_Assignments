@@ -1,6 +1,40 @@
     #include<iostream>
     #include<algorithm>
     #include<string>
+//Addition Of Two Matrices
+    #include<iostream>
+//     #include<algorithm>
+//     #include<string>
+//     using namespace std;
+    
+//   int main(){
+//       int matrix[3][3] = {
+//         {1, 2, 3},
+//         {4, 5, 6},
+//         {7, 8, 9}
+//     };
+//       int matrix_2[3][3] = {
+//         {1, 2, 3},
+//         {4, 5, 6},
+//         {7, 8, 9}
+//     };
+//     int matrix_3[3][3];
+//     for(int i = 0 ; i<3 ; i++){
+//         for(int j = 0 ; j<3 ; j++){
+        
+//         matrix_3[i][j] = matrix[i][j] + matrix_2[i][j];}
+//     }
+//     for(int i = 0 ; i <3 ; i++){
+//         for(int j = 0 ; j<3 ; j ++){
+//             cout<<matrix_3[i][j]<<" ";
+//         }
+//         cout<<endl;
+//     }
+      
+//       return 0 ;
+//   }
+    
+    
 // Transpose Of A Matrix
     using namespace std;
     
