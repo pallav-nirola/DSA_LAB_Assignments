@@ -95,6 +95,7 @@
 //       cout<<result<<endl;
 //       return 0 ;// 1st apprach 
 //   }
+// or directly just do string result = str + str_2;
     //   int main(){ 
     //       string str;
     //       getline(cin, str);
