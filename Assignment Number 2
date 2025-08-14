@@ -150,6 +150,26 @@
     // cout << "String without vowels: " << result << endl;
     //     return 0 ;
     // }
+//second approach;
+  #include<iostream>
+  using namespace std;
+  int main() {
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);
+    string result =" ";
+    for(int i = 0 ; i!=str[i]; i++){
+        char c = str[i];
+        bool isVowel = false;
+        if(c=='A'||c=='u'c=='o'||c=='i'||c=='e'||c=='a'||c=='U'||c=='O'||c=='I'||c=='E'||){
+            isVowel = true;
+        }
+        if(isVowel=false){
+            result = result + c;
+        }
+    }    cout << "String without vowels: " << result << endl;
+        return 0 ;
+    }
     
     
 
