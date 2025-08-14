@@ -158,7 +158,7 @@
     cout << "Enter a string: ";
     getline(cin, str);
     string result =" ";
-    for(int i = 0 ; i!=str[i]; i++){
+    for(int i = 0 ; str[i] != '\0'; i++){
         char c = str[i];
         bool isVowel = false;
         if(c=='A'||c=='u'c=='o'||c=='i'||c=='e'||c=='a'||c=='U'||c=='O'||c=='I'||c=='E'||){
