@@ -86,3 +86,43 @@ int main() {
     cout << "Reversed string: " << reverseString(input) << endl;
     return 0;
 }
+Ans 3 
+#include <iostream>
+#include <stack>
+using namespace std;
+
+// Function to check if parentheses are valid
+bool isValid(string s) {
+    stack<char> stk;
+    for (char ch : s) {
+        if (ch == '(' || ch == '[' || ch == '{') {
+            stk.push(ch);
+        } else {
+            if (stk.empty())
+                return false;
+
+            char top = stk.top();
+            if ((ch == ')' && top == '(') ||
+                (ch == '}' && top == '{') ||
+                (ch == ']' && top == '[')) {
+                stk.pop();
+            } else {
+                return false;
+            }
+        }
+    }
+    return stk.empty();
+}
+
+int main() {
+    string s;
+    cout << "Enter a string of parentheses: ";
+    getline(cin, s);
+
+    if (isValid(s))
+        cout << "Valid" << endl;
+    else
+        cout << "Not Valid" << endl;
+
+    return 0;
+}
