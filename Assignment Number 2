@@ -183,24 +183,27 @@ int main()
     // }
 //second approach;
   #include<iostream>
-  using namespace std;
-  int main() {
+using namespace std;
+int main() {
     string str;
-    cout << "Enter a string: ";
     getline(cin, str);
-    string result =" ";
-    for(int i = 0 ; str[i] != '\0'; i++){
-        char c = str[i];
-        bool isVowel = false;
-        if(c=='A'||c=='u'c=='o'||c=='i'||c=='e'||c=='a'||c=='U'||c=='O'||c=='I'||c=='E'||){
-            isVowel = true;
+    string answer = "";
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (str[i] != 'a' && str[i] != 'e' && str[i] != 'i' && str[i] != 'o' && str[i] != 'u' &&
+            str[i] != 'A' && str[i] != 'E' && str[i] != 'I' && str[i] != 'O' && str[i] != 'U')
+        {
+            answer = answer + str[i];
         }
-        if(isVowel=false){
-            result = result + c;
+        else{
+            continue;
         }
-    }    cout << "String without vowels: " << result << endl;
-        return 0 ;
+        
     }
+    cout<<answer<<endl;
+    
+    return 0;
+}
     
     
 
