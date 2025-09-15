@@ -96,6 +96,37 @@
 //       return 0 ;// 1st apprach 
 //   }
 // or directly just do string result = str + str_2;
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string str;
+    getline(cin, str);
+    string vowel = "aeiouAEIOU";
+    string answer = "";
+    for (int i = 0; i < str.length(); i++)
+    {
+        int j;
+        for ( j = 0; j < vowel.length(); j++)
+        {
+            if (str[i] == vowel[j])
+            {
+                break;
+            }
+        }
+        if (j == vowel.length())
+        {
+            answer += str[i];
+        }
+    }
+
+    cout << answer << endl;
+
+    return 0;
+}
     //   int main(){ 
     //       string str;
     //       getline(cin, str);
