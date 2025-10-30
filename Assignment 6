@@ -1,0 +1,136 @@
+#include <iostream>
+using namespace std;
+
+// Circular Linked List Node
+struct CNode {
+    int data;
+    CNode *next;
+};
+
+// Doubly Linked List Node
+struct DNode {
+    int data;
+    DNode *next;
+    DNode *prev;
+};
+Ans -1 void insertFront(CNode* &head, int val) {
+    CNode* newNode = new CNode{val, nullptr};
+
+    if (head == nullptr) {
+        head = newNode;
+        newNode->next = head;
+        return;
+    }
+
+    CNode* temp = head;
+    while (temp->next != head)
+        temp = temp->next;
+
+    temp->next = newNode;
+    newNode->next = head;
+    head = newNode;
+}
+
+void insertEnd(CNode* &head, int val) {
+    CNode* newNode = new CNode{val, nullptr};
+
+    if (head == nullptr) {
+        head = newNode;
+        newNode->next = head;
+        return;
+    }
+
+    CNode* temp = head;
+    while (temp->next != head)
+        temp = temp->next;
+
+    temp->next = newNode;
+    newNode->next = head;
+}
+
+void insertAfter(CNode* head, int key, int val) {
+    if (head == nullptr) return;
+    CNode* temp = head;
+    do {
+        if (temp->data == key) {
+            CNode* newNode = new CNode{val, temp->next};
+            temp->next = newNode;
+            return;
+        }
+        temp = temp->next;
+    } while (temp != head);
+}
+
+(b)
+void deleteNode(CNode* &head, int key) {
+    if (head == nullptr) return;
+
+    CNode *curr = head, *prev = nullptr;
+    do {
+        if (curr->data == key) {
+            if (curr == head && curr->next == head) { // single node
+                delete curr;
+                head = nullptr;
+                return;
+            }
+
+            if (curr == head) {
+                CNode* temp = head;
+                while (temp->next != head)
+                    temp = temp->next;
+                temp->next = head->next;
+                head = head->next;
+                delete curr;
+                return;
+            }
+
+            prev->next = curr->next;
+            delete curr;
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    } while (curr != head);
+}
+(c)
+bool searchNode(CNode* head, int key) {
+    if (head == nullptr) return false;
+    CNode* temp = head;
+    do {
+        if (temp->data == key)
+            return true;
+        temp = temp->next;
+    } while (temp != head);
+    return false;
+}
+Ans - 2 
+void displayCircular(CNode* head) {
+    if (head == nullptr) return;
+    CNode* temp = head;
+    do {
+        cout << temp->data << " ";
+        temp = temp->next;
+    } while (temp != head);
+    cout << head->data << endl; // repeat head at end
+}
+Ans -3 
+int sizeCircular(CNode* head) {
+    if (head == nullptr) return 0;
+    int count = 0;
+    CNode* temp = head;
+    do {
+        count++;
+        temp = temp->next;
+    } while (temp != head);
+    return count;
+}
+bool isCircular(Node* head) {
+    if (head == nullptr)
+        return false;
+
+    Node* temp = head->next;
+    while (temp != nullptr && temp != head)
+        temp = temp->next;
+
+    return (temp == head);
+}
