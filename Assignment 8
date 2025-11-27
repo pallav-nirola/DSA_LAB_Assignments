@@ -1,0 +1,332 @@
+1. Binary Tree Traversals (Recursive)
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+Node* createNode(int value) {
+    Node* temp = new Node();
+    temp->data = value;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+void preorder(Node* root) {
+    if (root == NULL) return;
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void inorder(Node* root) {
+    if (root == NULL) return;
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+
+void postorder(Node* root) {
+    if (root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+
+int main() {
+    Node* root = createNode(10);
+    root->left = createNode(5);
+    root->right = createNode(15);
+
+    cout << "Preorder: ";
+    preorder(root);
+
+    cout << "\nInorder: ";
+    inorder(root);
+
+    cout << "\nPostorder: ";
+    postorder(root);
+
+    return 0;
+}
+2. Binary Search Tree Operations
+#include <iostream>
+using namespace std;
+
+struct BST {
+    int data;
+    BST* left;
+    BST* right;
+};
+
+// Insert
+BST* insertNode(BST* root, int key) {
+    if (!root) {
+        root = new BST();
+        root->data = key;
+        root->left = root->right = NULL;
+        return root;
+    }
+    if (key < root->data)
+        root->left = insertNode(root->left, key);
+    else if (key > root->data)
+        root->right = insertNode(root->right, key);
+    return root;
+}
+
+// Recursive Search
+BST* searchRecursive(BST* root, int key) {
+    if (!root || root->data == key) return root;
+    if (key < root->data) return searchRecursive(root->left, key);
+    return searchRecursive(root->right, key);
+}
+
+// Non-Recursive Search
+BST* searchIterative(BST* root, int key) {
+    while (root) {
+        if (root->data == key) return root;
+        else if (key < root->data) root = root->left;
+        else root = root->right;
+    }
+    return NULL;
+}
+
+// Min Value
+BST* minValue(BST* root) {
+    while (root && root->left != NULL)
+        root = root->left;
+    return root;
+}
+
+// Max Value
+BST* maxValue(BST* root) {
+    while (root && root->right != NULL)
+        root = root->right;
+    return root;
+}
+
+// Inorder Successor
+BST* inorderSuccessor(BST* root, int key) {
+    BST* target = searchRecursive(root, key);
+    if (!target) return NULL;
+
+    if (target->right)
+        return minValue(target->right);
+
+    BST* succ = NULL;
+    while (root) {
+        if (key < root->data) {
+            succ = root;
+            root = root->left;
+        } else if (key > root->data)
+            root = root->right;
+        else break;
+    }
+    return succ;
+}
+
+// Inorder Predecessor
+BST* inorderPredecessor(BST* root, int key) {
+    BST* target = searchRecursive(root, key);
+    if (!target) return NULL;
+
+    if (target->left)
+        return maxValue(target->left);
+
+    BST* pred = NULL;
+    while (root) {
+        if (key > root->data) {
+            pred = root;
+            root = root->right;
+        } else if (key < root->data)
+            root = root->left;
+        else break;
+    }
+    return pred;
+}
+
+int main() {
+    BST* root = NULL;
+    root = insertNode(root, 50);
+    insertNode(root, 30);
+    insertNode(root, 70);
+    insertNode(root, 20);
+    insertNode(root, 40);
+
+    cout << "Min: " << minValue(root)->data << endl;
+    cout << "Max: " << maxValue(root)->data << endl;
+
+    cout << "Successor of 30: " << inorderSuccessor(root, 30)->data << endl;
+    cout << "Predecessor of 70: " << inorderPredecessor(root, 70)->data << endl;
+
+    return 0;
+}
+
+✅ 3. BST Full Program: Insert, Delete, Depth
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *left, *right;
+};
+
+Node* insert(Node* root, int key) {
+    if (!root) {
+        Node* node = new Node();
+        node->data = key;
+        node->left = node->right = NULL;
+        return node;
+    }
+    if (key < root->data) root->left = insert(root->left, key);
+    else if (key > root->data) root->right = insert(root->right, key);
+    return root;
+}
+
+Node* findMin(Node* root) {
+    while (root->left) root = root->left;
+    return root;
+}
+
+Node* deleteNode(Node* root, int key) {
+    if (!root) return root;
+
+    if (key < root->data) root->left = deleteNode(root->left, key);
+    else if (key > root->data) root->right = deleteNode(root->right, key);
+    else {
+        if (!root->left) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if (!root->right) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        Node* temp = findMin(root->right);
+        root->data = temp->data;
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+int maxDepth(Node* root) {
+    if (!root) return 0;
+    return 1 + max(maxDepth(root->left), maxDepth(root->right));
+}
+
+int minDepth(Node* root) {
+    if (!root) return 0;
+    return 1 + min(minDepth(root->left), minDepth(root->right));
+}
+
+int main() {
+    Node* root = NULL;
+    root = insert(root, 40);
+    insert(root, 20);
+    insert(root, 10);
+    insert(root, 50);
+
+    cout << "Max Depth: " << maxDepth(root) << endl;
+    cout << "Min Depth: " << minDepth(root) << endl;
+
+    root = deleteNode(root, 20);
+
+    cout << "After Delete, Max Depth: " << maxDepth(root) << endl;
+
+    return 0;
+}
+
+✅ 4. Check whether a Binary Tree is a BST
+#include <iostream>
+using namespace std;
+
+struct Node{
+    int data;
+    Node *left, *right;
+};
+
+bool checkBST(Node* root, Node* min = NULL, Node* max = NULL) {
+    if (!root) return true;
+
+    if ((min && root->data <= min->data) || (max && root->data >= max->data))
+        return false;
+
+    return checkBST(root->left, min, root) && checkBST(root->right, root, max);
+}
+
+ 5. Heap Sort
+#include <iostream>
+using namespace std;
+
+void heapify(int arr[], int n, int i) {
+    int largest = i;
+    int l = 2*i + 1;
+    int r = 2*i + 2;
+
+    if (l < n && arr[l] > arr[largest]) largest = l;
+    if (r < n && arr[r] > arr[largest]) largest = r;
+
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSort(int arr[], int n) {
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    for (int i = n-1; i > 0; i--) {
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}
+
+ 6. Priority Queue using Heap
+#include <iostream>
+using namespace std;
+
+class PriorityQueue {
+    int arr[100], size;
+
+public:
+    PriorityQueue() { size = 0; }
+
+    void insert(int x) {
+        arr[size] = x;
+        int i = size;
+        size++;
+
+        while (i > 0 && arr[(i - 1) / 2] < arr[i]) {
+            swap(arr[i], arr[(i - 1) / 2]);
+            i = (i - 1) / 2;
+        }
+    }
+
+    int extractMax() {
+        if (size == 0) return -1;
+
+        int root = arr[0];
+        arr[0] = arr[size - 1];
+        size--;
+
+        int i = 0;
+        while (true) {
+            int l = 2*i+1, r = 2*i+2, largest = i;
+
+            if (l < size && arr[l] > arr[largest]) largest = l;
+            if (r < size && arr[r] > arr[largest]) largest = r;
+
+            if (largest != i) {
+                swap(arr[i], arr[largest]);
+                i = largest;
+            } else break;
+        }
+        return root;
+    }
+};
